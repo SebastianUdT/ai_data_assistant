@@ -1,12 +1,30 @@
-import os
+from pydantic import ValidationError
 
-from dotenv import load_dotenv
+from llm import ask_llm, parse_customer
 
-load_dotenv()
 
-api_key = os.getenv("MY_API_KEY")
+def main() -> None:
+    prompt = input("Ask something: ")
 
-if not api_key:
-    raise ValueError("MY_API_KEY is not configured")
+    response = ask_llm(prompt)
 
-print("API key loaded successfully")
+    if "name" in response:
+        try:
+            customer = parse_customer(response)
+
+            print("\nCustomer:")
+            print(f"Name: {customer.name}")
+            print(f"Email: {customer.email}")
+            print(f"Purchase: ${customer.purchase_amount}")
+
+        except ValidationError as error:
+            print("\nInvalid customer data:")
+            print(error)
+
+    else:
+        print("\nAssistant:")
+        print(response["message"])
+
+
+if __name__ == "__main__":
+    main()
