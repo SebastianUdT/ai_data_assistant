@@ -1,12 +1,23 @@
+import argparse
+
 from pydantic import ValidationError
 
-from llm import ask_llm, parse_customer
+from src.llm import ask_llm, parse_customer
 
 
 def main() -> None:
-    prompt = input("Ask something: ")
+    parser = argparse.ArgumentParser(
+        description="AI Data Assistant"
+    )
 
-    response = ask_llm(prompt)
+    parser.add_argument(
+        "prompt",
+        help="Question or request for the assistant",
+    )
+
+    args = parser.parse_args()
+
+    response = ask_llm(args.prompt)
 
     if "name" in response:
         try:

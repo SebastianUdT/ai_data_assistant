@@ -1,7 +1,8 @@
 import pytest
 from pydantic import ValidationError
 
-from src.llm import Customer, parse_customer
+from src.models import Customer
+from src.structured_model import parse_customer
 
 
 def test_parse_customer():
@@ -19,7 +20,7 @@ def test_parse_customer():
     assert customer.purchase_amount == 350
 
 
-def test_parse_customer_rejects_invalid_purchase_amount():
+def test_invalid_customer():
     data = {
         "name": "John",
         "email": "john@example.com",
