@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "stage1-demo-plugin",
+  "version": "1.0.0",
+  "description": "Stage 1 demo plugin combining a customer finance skill with an MCP server.",
+  "keywords": [
+    "finance",
+    "customer",
+    "mcp",
+    "skills"
+  ]
+}

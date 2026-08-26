@@ -1,14 +1,13 @@
-from abc import ABC, abstractmethod
-
 from src.agent_model import AgentResponse
+from src.model import Model
 from src.model_request import ModelRequest
 
 
-class Model(ABC):
-
-    @abstractmethod
+class TestModel(Model):
     def generate(
         self,
         request: ModelRequest,
     ) -> AgentResponse:
-        pass
+        return AgentResponse(
+            content="Test model response."
+        )
